@@ -2,11 +2,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D _body;
+    [SerializeField] private float speed;
+    private Rigidbody2D body;
 
     private void Awake()
     {
-        _body = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
     }
 
+    void Update()
+    {
+        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            body.velocity = new Vector2(body.velocity.x, speed);
+        }
+    }
 }
