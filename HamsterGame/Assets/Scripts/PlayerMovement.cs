@@ -12,8 +12,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
+        //the way the hamster is facing when moving left/right
+        if (horizontalInput > 0.01f)
+        {
+            transform.localScale = new Vector2(2,2);
+        }
+        else if(horizontalInput < 0.01f)
+        {
+            transform.localScale = new Vector2(-2, 2);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             body.velocity = new Vector2(body.velocity.x, speed);
