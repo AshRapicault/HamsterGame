@@ -56,5 +56,11 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
             anim.SetBool("grounded", grounded);
         }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            grounded = true;
+            anim.SetBool("grounded", grounded);
+        }
     }
 }
