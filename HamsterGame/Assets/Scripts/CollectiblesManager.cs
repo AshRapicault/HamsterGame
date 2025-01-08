@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollectiblesManager : MonoBehaviour
 {
+    public int count;
     // Start is called before the first frame update
     void Start()
     {

@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool grounded;
 
+    private CollectiblesManager cm;
+
     private void Awake()
     {
         // Get references for your components
@@ -61,6 +63,14 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = true;
             anim.SetBool("grounded", grounded);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("collectibles"))
+        {
+            Destroy(other.gameObject);
+            cm.count++;
         }
     }
 }
