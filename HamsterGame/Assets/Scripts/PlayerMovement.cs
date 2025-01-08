@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool grounded;
 
-    private CollectiblesManager cm;
+    [SerializeField] private CollectiblesManager cm;
 
     private void Awake()
     {
