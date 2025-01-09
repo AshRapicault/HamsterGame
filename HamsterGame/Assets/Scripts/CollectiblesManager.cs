@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class CollectiblesManager : MonoBehaviour
 {
-    public int count;
+    public int countPoints;
+    public int countAttackSeeds;
     public Text pointsText;
+    public Text AttackSeedText;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,7 @@ public class CollectiblesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pointsText.text = " : "+count.ToString();
+        pointsText.text = " : "+countPoints.ToString();
+        AttackSeedText.text = " : "+countAttackSeeds.ToString() +" /3";
     }
 }

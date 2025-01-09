@@ -24,11 +24,11 @@ public class PlayerMovement : MonoBehaviour
         // The way the hamster is facing when moving left/right
         if (horizontalInput > 0.1f)
         {
-            transform.localScale = new Vector2(2, 2);  // Facing right
+            transform.localScale = new Vector2(1, 1);  // Facing right
         }
         else if (horizontalInput < -0.1f)
         {
-            transform.localScale = new Vector2(-2, 2); // Facing left
+            transform.localScale = new Vector2(-1, 1); // Facing left
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
@@ -67,10 +67,15 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("collectibles"))
+        if (other.gameObject.CompareTag("PointCollectible"))
         {
             Destroy(other.gameObject);
-            cm.count++;
+            cm.countPoints++;
+        }
+        else if (other.gameObject.CompareTag("AttackCollectible") && cm.countAttackSeeds<3)
+        {
+            Destroy(other.gameObject);
+            cm.countAttackSeeds++;
         }
     }
 }

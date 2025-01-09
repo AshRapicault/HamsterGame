@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Ground
   - Obstacle
-  - collectibles
+  - AttackCollectible
+  - PointCollectible
   layers:
   - Default
   - TransparentFX
