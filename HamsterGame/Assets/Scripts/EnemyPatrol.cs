@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.UI;
+using UnityEngine.SceneManagement;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -63,5 +65,10 @@ public class EnemyPatrol : MonoBehaviour
         Gizmos.DrawWireSphere(enemyStartPoint.transform.position, 0.5f);
         Gizmos.DrawWireSphere(enemyEndPoint.transform.position, 0.5f);
         Gizmos.DrawLine(enemyStartPoint.transform.position,enemyEndPoint.transform.position);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
