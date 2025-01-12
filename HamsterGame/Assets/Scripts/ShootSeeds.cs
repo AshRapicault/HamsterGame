@@ -41,7 +41,6 @@ public class ShootSeeds : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
         }
     }
 }
