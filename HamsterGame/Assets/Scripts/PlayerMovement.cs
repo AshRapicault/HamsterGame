@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             cm.countPoints++;
         }
-        else if (other.gameObject.CompareTag("AttackCollectible") && cm.countAttackSeeds<3)
+        else if (other.gameObject.CompareTag("AttackCollectible") && cm.countAttackSeeds < 3)
         {
             Destroy(other.gameObject);
             cm.countAttackSeeds++;

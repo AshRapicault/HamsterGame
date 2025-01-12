@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,13 +13,13 @@ public class CollectiblesManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointsText.text = " : "+countPoints.ToString();
-        AttackSeedText.text = " : "+countAttackSeeds.ToString() +" /3";
+        pointsText.text = " : " + countPoints.ToString();
+        AttackSeedText.text = " : " + countAttackSeeds.ToString() + " /3";
     }
 }

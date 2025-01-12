@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - AttackCollectible
   - PointCollectible
+  - enemy
   layers:
   - Default
   - TransparentFX

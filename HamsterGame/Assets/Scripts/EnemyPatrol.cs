@@ -28,7 +28,7 @@ public class EnemyPatrol : MonoBehaviour
     void Update()
     {
         Vector2 point = currentPoint.position - transform.position;
-        if(currentPoint == enemyStartPoint.transform)
+        if (currentPoint == enemyStartPoint.transform)
         {
             body.velocity = new Vector2(speed, 0);
         }
@@ -57,14 +57,14 @@ public class EnemyPatrol : MonoBehaviour
             localScale.x *= -1;
             transform.localScale = localScale;
 
-            movingRight = !movingRight;  
+            movingRight = !movingRight;
         }
     }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(enemyStartPoint.transform.position, 0.5f);
         Gizmos.DrawWireSphere(enemyEndPoint.transform.position, 0.5f);
-        Gizmos.DrawLine(enemyStartPoint.transform.position,enemyEndPoint.transform.position);
+        Gizmos.DrawLine(enemyStartPoint.transform.position, enemyEndPoint.transform.position);
     }
 
     public void RestartGame()
