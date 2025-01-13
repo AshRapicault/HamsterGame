@@ -9,6 +9,8 @@ TagManager:
   - AttackCollectible
   - PointCollectible
   - enemy
+  - AttackSeed
+  - gameOver
   layers:
   - Default
   - TransparentFX

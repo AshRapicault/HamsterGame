@@ -64,11 +64,6 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
             anim.SetBool("grounded", grounded);
         }
-
-        if (collision.gameObject.CompareTag("enemy"))
-        {
-            Destroy(gameObject);
-        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {

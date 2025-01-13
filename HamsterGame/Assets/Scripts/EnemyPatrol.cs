@@ -14,6 +14,8 @@ public class EnemyPatrol : MonoBehaviour
     private Transform currentPoint;
     private bool movingRight = true;
 
+    public gameOverScript gameOver;
+
     void Start()
     {
         // Get references for your components
@@ -21,6 +23,8 @@ public class EnemyPatrol : MonoBehaviour
         anim = GetComponent<Animator>();
         currentPoint = enemyStartPoint.transform;
         anim.SetBool("isWalking", true);
+
+        gameOver = GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverScript>();
 
     }
 
@@ -67,8 +71,18 @@ public class EnemyPatrol : MonoBehaviour
         Gizmos.DrawLine(enemyStartPoint.transform.position, enemyEndPoint.transform.position);
     }
 
-    public void RestartGame()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+            gameOver.GameOver();
+        }
+
+        if (collision.gameObject.CompareTag("AttackSeed"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }
