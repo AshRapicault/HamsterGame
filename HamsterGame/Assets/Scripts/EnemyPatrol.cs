@@ -15,6 +15,7 @@ public class EnemyPatrol : MonoBehaviour
     private bool movingRight = true;
 
     public gameOverScript gameOver;
+    public CollectiblesManager collectiblesManager;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class EnemyPatrol : MonoBehaviour
         anim.SetBool("isWalking", true);
 
         gameOver = GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverScript>();
+        collectiblesManager = GameObject.FindGameObjectWithTag("collectiblesManager").GetComponent<CollectiblesManager>();
 
     }
 
@@ -83,6 +85,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            collectiblesManager.countPoints += 5;
         }
     }
 }

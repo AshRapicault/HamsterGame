@@ -9,8 +9,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private CollectiblesManager cm;
 
+    private float normalSpeed;
+    private bool speedBoostActive = false;
+    private float speedBoostDuration = 10f;
+    private float speedBoostTimer = 0f;
+
+
     private void Awake()
     {
+        normalSpeed = speed;
         // Get references for your components
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -18,6 +25,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (speedBoostActive)
+        {
+            speedBoostTimer -= Time.deltaTime;
+            if (speedBoostTimer <= 0f)
+            {
+                speed = normalSpeed;
+                speedBoostActive = false;
+            }
+        }
+
         float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
@@ -71,11 +88,23 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
             cm.countPoints++;
+
+            if (cm.countPoints == 20 && !speedBoostActive)
+            {
+                ActivateSpeedBoost();
+            }
         }
         else if (other.gameObject.CompareTag("AttackCollectible") && cm.countAttackSeeds < 3)
         {
             Destroy(other.gameObject);
             cm.countAttackSeeds++;
         }
+    }
+
+    private void ActivateSpeedBoost()
+    {
+        speed += 5;
+        speedBoostActive = true;
+        speedBoostTimer = speedBoostDuration;
     }
 }
