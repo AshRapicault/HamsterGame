@@ -8,12 +8,24 @@ public class ShootSeeds : MonoBehaviour
     [SerializeField] private GameObject seedPrefab;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float seedSpeed = 10f;
+    public CollectiblesManager collectiblesManager;
+
+
+    private void Start()
+    {
+        collectiblesManager = GameObject.FindGameObjectWithTag("collectiblesManager").GetComponent<CollectiblesManager>();
+    }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ShootSeed();
+            if(collectiblesManager.countAttackSeeds > 0)
+            {
+                ShootSeed();
+                collectiblesManager.countAttackSeeds--;
+            }
+            
         }
     }
 
