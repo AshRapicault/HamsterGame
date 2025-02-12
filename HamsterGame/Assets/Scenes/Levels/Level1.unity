@@ -572,7 +572,7 @@ MonoBehaviour:
   seedPrefab: {fileID: 612674903296999474, guid: 499557fb73b6d504ca70518ef7bb3f92, type: 3}
   shootPoint: {fileID: 917459261}
   seedSpeed: 10
-  collectiblesManager: {fileID: 0}
+  collectiblesManager: {fileID: 2059041182}
 --- !u!1 &70772328
 GameObject:
   m_ObjectHideFlags: 0
