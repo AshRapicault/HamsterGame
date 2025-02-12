@@ -12,6 +12,7 @@ TagManager:
   - AttackSeed
   - gameOver
   - collectiblesManager
+  - NextLevel
   layers:
   - Default
   - TransparentFX
