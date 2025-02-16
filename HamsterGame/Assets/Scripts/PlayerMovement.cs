@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool grounded;
 
-    [SerializeField] private CollectiblesManager cm;
+    private CollectiblesManager cm;
     [SerializeField] private gameOverScript gameOver;
 
 
@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private float speedBoostDuration = 10f;
     private float speedBoostTimer = 0f;
 
+    private void Start()
+    {
+        cm = CollectiblesManager.instance;
+    }
 
     private void Awake()
     {

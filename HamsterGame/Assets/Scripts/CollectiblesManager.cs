@@ -6,25 +6,74 @@ using UnityEngine.SceneManagement;
 
 public class CollectiblesManager : MonoBehaviour
 {
+    public static CollectiblesManager instance;
+
     public int countPoints;
     public int countAttackSeeds;
     public Text pointsText;
     public Text AttackSeedText;
     bool isLevel2;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        isLevel2 = SceneManager.GetActiveScene().name == "Level2";
-        pointsText.text = " : " + countPoints.ToString();
-
-        if (isLevel2)
+        if (instance == null)
         {
-            AttackSeedText.text = " : " + countAttackSeeds.ToString();
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            AttackSeedText.text = " : " + countAttackSeeds.ToString() + " /3";
+            Destroy(gameObject);
+        }
+
+        pointsText = GameObject.Find("TextPoints")?.GetComponent<Text>();
+        AttackSeedText = GameObject.Find("TextAttack")?.GetComponent<Text>();
+
+        if (pointsText == null || AttackSeedText == null)
+        {
+            Debug.LogWarning("UI Text elementen niet gevonden.");
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        pointsText = GameObject.Find("TextPoints")?.GetComponent<Text>();
+        AttackSeedText = GameObject.Find("TextAttack")?.GetComponent<Text>();
+
+        if (pointsText == null || AttackSeedText == null)
+        {
+            Debug.LogWarning("UI Text elementen niet gevonden in de nieuwe scène.");
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void Update()
+    {
+        isLevel2 = SceneManager.GetActiveScene().name == "Level2";
+        if (pointsText != null)
+        {
+            pointsText.text = " : " + countPoints.ToString();
+        }
+
+        if (AttackSeedText != null)
+        {
+            if (isLevel2)
+            {
+                AttackSeedText.text = " : " + countAttackSeeds.ToString();
+            }
+            else
+            {
+                AttackSeedText.text = " : " + countAttackSeeds.ToString() + " /3";
+            }
         }
     }
 }

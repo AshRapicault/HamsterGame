@@ -9,7 +9,6 @@ public class gameOverScript : MonoBehaviour
     public AudioSource sadHampter;
     public void RestartGame()
     {
-        Debug.Log("Active Scene: " + SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

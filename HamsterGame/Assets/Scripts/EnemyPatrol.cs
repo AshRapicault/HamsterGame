@@ -26,7 +26,7 @@ public class EnemyPatrol : MonoBehaviour
         anim.SetBool("isWalking", true);
 
         gameOver = GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverScript>();
-        collectiblesManager = GameObject.FindGameObjectWithTag("collectiblesManager").GetComponent<CollectiblesManager>();
+        collectiblesManager = CollectiblesManager.instance;
 
     }
 
