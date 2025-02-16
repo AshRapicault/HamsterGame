@@ -13,6 +13,9 @@ TagManager:
   - gameOver
   - collectiblesManager
   - NextLevel
+  - Chair
+  - livingRoom
+  - DeadlyObstacle
   layers:
   - Default
   - TransparentFX

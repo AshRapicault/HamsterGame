@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
 
     [SerializeField] private CollectiblesManager cm;
+    [SerializeField] private gameOverScript gameOver;
+
 
     private float normalSpeed;
     private bool speedBoostActive = false;
@@ -84,20 +87,26 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        bool isLevel2 = SceneManager.GetActiveScene().name == "Level2";
+
         if (other.gameObject.CompareTag("PointCollectible"))
         {
             Destroy(other.gameObject);
             cm.countPoints++;
-
-            if (cm.countPoints == 20 && !speedBoostActive)
+        }
+        else if (other.gameObject.CompareTag("AttackCollectible"))
+        {
+            if (isLevel2 || cm.countAttackSeeds < 3)
             {
-                ActivateSpeedBoost();
+                Destroy(other.gameObject);
+                cm.countAttackSeeds++;
             }
         }
-        else if (other.gameObject.CompareTag("AttackCollectible") && cm.countAttackSeeds < 3)
+
+        if (other.gameObject.CompareTag("DeadlyObstacle"))
         {
-            Destroy(other.gameObject);
-            cm.countAttackSeeds++;
+            Destroy(gameObject);
+            gameOver.GameOver();
         }
     }
 
