@@ -28,22 +28,12 @@ public class CollectiblesManager : MonoBehaviour
 
         pointsText = GameObject.Find("TextPoints")?.GetComponent<Text>();
         AttackSeedText = GameObject.Find("TextAttack")?.GetComponent<Text>();
-
-        if (pointsText == null || AttackSeedText == null)
-        {
-            Debug.LogWarning("UI Text elementen niet gevonden.");
-        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         pointsText = GameObject.Find("TextPoints")?.GetComponent<Text>();
         AttackSeedText = GameObject.Find("TextAttack")?.GetComponent<Text>();
-
-        if (pointsText == null || AttackSeedText == null)
-        {
-            Debug.LogWarning("UI Text elementen niet gevonden in de nieuwe scène.");
-        }
     }
 
     private void OnEnable()
