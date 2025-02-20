@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Awake()
-    {
+    {  
         normalSpeed = speed;
         // Get references for your components
         body = GetComponent<Rigidbody2D>();
