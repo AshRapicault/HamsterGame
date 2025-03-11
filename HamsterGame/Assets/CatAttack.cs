@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatSit : StateMachineBehaviour
+public class CatAttack : StateMachineBehaviour
 {
-    public float followRange = 10f;
-
     Transform player;
     CatBoss cat;
 
@@ -13,20 +11,20 @@ public class CatSit : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cat = animator.GetComponent<CatBoss>();
+
+        cat.LookAtPlayer(); 
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float distance = Vector2.Distance(player.position, cat.transform.position);
-
-        if (distance <= followRange)
+        if (!cat.PlayerInAttackRange())
         {
-            animator.SetTrigger("PlayerIsNear"); // Start met volgen
+            animator.SetTrigger("TooFar");
         }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("PlayerIsNear");
+        animator.ResetTrigger("TooFar");
     }
 }

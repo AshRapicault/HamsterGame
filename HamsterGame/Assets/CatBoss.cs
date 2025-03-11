@@ -5,26 +5,32 @@ using UnityEngine;
 public class CatBoss : MonoBehaviour
 {
     public Transform player;
-
     public bool isFlipped = false;
+    public float attackRange = 3f; 
+
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void LookAtPlayer()
     {
-        Vector3 flipped = transform.localScale;
-        flipped.z *= -1f;
-
-        if (transform.position.x > player.position.x && isFlipped)
+        if (transform.position.x > player.position.x)
         {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = false;
-        }
-        else if (transform.position.x < player.position.x && !isFlipped)
-        {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
+            spriteRenderer.flipX = true; 
             isFlipped = true;
+        }
+        else if (transform.position.x < player.position.x)
+        {
+            spriteRenderer.flipX = false; 
+            isFlipped = false;
         }
     }
 
+    public bool PlayerInAttackRange()
+    {
+        return Vector2.Distance(transform.position, player.position) <= attackRange;
+    }
 }
