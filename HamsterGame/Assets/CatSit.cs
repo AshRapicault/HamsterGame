@@ -4,29 +4,15 @@ using UnityEngine;
 
 public class CatSit : StateMachineBehaviour
 {
-    public float followRange = 10f;
-
-    Transform player;
     CatBoss cat;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         cat = animator.GetComponent<CatBoss>();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float distance = Vector2.Distance(player.position, cat.transform.position);
-
-        if (distance <= followRange)
-        {
-            animator.SetTrigger("PlayerIsNear"); // Start met volgen
-        }
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.ResetTrigger("PlayerIsNear");
+        animator.SetBool("TooFar", cat.TooFar());
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class CatBoss : MonoBehaviour
 {
     public Transform player;
-    public bool isFlipped = false;
-    public float attackRange = 3f; 
+    public float attackRange = 7f;
+    public float followRange = 15f;
 
     private SpriteRenderer spriteRenderer;
 
@@ -17,19 +17,16 @@ public class CatBoss : MonoBehaviour
 
     public void LookAtPlayer()
     {
-        if (transform.position.x > player.position.x)
-        {
-            spriteRenderer.flipX = true; 
-            isFlipped = true;
-        }
-        else if (transform.position.x < player.position.x)
-        {
-            spriteRenderer.flipX = false; 
-            isFlipped = false;
-        }
+        spriteRenderer.flipX = transform.position.x < player.position.x;
     }
 
-    public bool PlayerInAttackRange()
+    public bool TooFar()
+    {
+        float distance = Vector2.Distance(transform.position, player.position);
+        return distance > followRange;
+    }
+
+    public bool ShouldAttack()
     {
         return Vector2.Distance(transform.position, player.position) <= attackRange;
     }
