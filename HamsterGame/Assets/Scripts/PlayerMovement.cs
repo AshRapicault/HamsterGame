@@ -11,19 +11,21 @@ public class PlayerMovement : MonoBehaviour
     private CollectiblesManager cm;
     [SerializeField] private gameOverScript gameOver;
 
-
     private float normalSpeed;
     private bool speedBoostActive = false;
     private float speedBoostDuration = 10f;
     private float speedBoostTimer = 0f;
 
+    private SpriteRenderer spriteRenderer;
+
     private void Start()
     {
         cm = CollectiblesManager.instance;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Awake()
-    {  
+    {
         normalSpeed = speed;
         // Get references for your components
         body = GetComponent<Rigidbody2D>();
@@ -45,14 +47,14 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-        // The way the hamster is facing when moving left/right
+        // Flip de speler op basis van de bewegingsrichting
         if (horizontalInput > 0.1f)
         {
-            transform.localScale = new Vector2(1, 1);  // Facing right
+            spriteRenderer.flipX = false;
         }
         else if (horizontalInput < -0.1f)
         {
-            transform.localScale = new Vector2(-1, 1); // Facing left
+            spriteRenderer.flipX = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
@@ -89,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("grounded", grounded);
         }
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         bool isLevel2 = SceneManager.GetActiveScene().name == "Level2";
