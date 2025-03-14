@@ -4,18 +4,20 @@ using UnityEngine;
 public class SeedSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject seedPrefab; // Het zaadje prefab
-    [SerializeField] private float spawnInterval = 2f; // Interval in seconden tussen spawns
-    [SerializeField] private float spawnHeight = 2f; // Max hoogte waarop de zaadjes kunnen verschijnen
-    [SerializeField] private float spawnWidth = 5f; // Max breedte waarop de zaadjes kunnen verschijnen
+    [SerializeField] private float spawnInterval = 2f; // Interval tussen spawns
+    [SerializeField] private float spawnHeight = 2f; // Maximale hoogte waarop zaadjes kunnen verschijnen
+    [SerializeField] private float spawnWidth = 5f; // Maximale breedte waarop zaadjes kunnen verschijnen
 
     private bool isPlayerInField = false;
     private bool isSpawning = false;
     public CollectiblesManager cm;
     public BossHealth bossHealth;
+    gameOverScript gameOver;
 
     void Start()
     {
         cm = CollectiblesManager.instance;
+        gameOver = FindObjectOfType<gameOverScript>();
     }
 
     void Update()
@@ -24,17 +26,13 @@ public class SeedSpawner : MonoBehaviour
         {
             StartCoroutine(SpawnSeeds());
         }
-        else if (cm.countAttackSeeds >= 30)
-        {
-            StopCoroutine(SpawnSeeds());
-        }
     }
 
     private IEnumerator SpawnSeeds()
     {
         isSpawning = true;
 
-        while (isPlayerInField && cm.countAttackSeeds < 30)
+        while (isPlayerInField && cm.countAttackSeeds < 30 && bossHealth.CurrentHealth > 0)
         {
             float randomX = transform.position.x + Random.Range(-spawnWidth / 2, spawnWidth / 2);
             float randomY = transform.position.y + Random.Range(-spawnHeight, 0);
@@ -44,6 +42,22 @@ public class SeedSpawner : MonoBehaviour
         }
 
         isSpawning = false;
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
+        StopAllCoroutines();
+        DestroyAllSeeds();
+    }
+
+    public void DestroyAllSeeds()
+    {
+        GameObject[] seeds = GameObject.FindGameObjectsWithTag("AttackCollectible");
+        foreach (GameObject seed in seeds)
+        {
+            Destroy(seed);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -59,12 +73,17 @@ public class SeedSpawner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInField = false;
+            StopSpawning();
 
             if (bossHealth != null)
             {
                 bossHealth.RestoreHealth();
             }
-            StopCoroutine(SpawnSeeds());
+
+            if (!gameOver.gameOverActive)
+            {
+                FindObjectOfType<CatBoss>().ReturnToStart();
+            }
         }
     }
 }

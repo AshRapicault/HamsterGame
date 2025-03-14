@@ -7,20 +7,22 @@ public class BossHealth : MonoBehaviour
     private int currentHealth;
     public Slider healthBar;
 
+    public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
+
     void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
-        healthBar.value = currentHealth;
+        healthBar.value = CurrentHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.value = currentHealth;
+        CurrentHealth -= damage;
+        healthBar.value = CurrentHealth;
 
         // Als de gezondheid 0 of lager is, sterft de kat
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();
         }
@@ -36,12 +38,13 @@ public class BossHealth : MonoBehaviour
 
     void Die()
     {
+        FindObjectOfType<SeedSpawner>().StopSpawning();
         Destroy(gameObject);
     }
 
     public void RestoreHealth()
     {
-        currentHealth = maxHealth;
-        healthBar.value = currentHealth;
+        CurrentHealth = maxHealth;
+        healthBar.value = CurrentHealth;
     }
 }
