@@ -18,7 +18,6 @@ public class CatSit : StateMachineBehaviour
         animator.SetBool("TooFar", cat.TooFar());
         if (gameOver.gameOverActive == true)
         {
-            Debug.Log("player ded now cat should sit");
             animator.SetBool("playerDead", true);
         }
     }

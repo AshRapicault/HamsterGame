@@ -35,9 +35,9 @@ public class CatBoss : MonoBehaviour
             Mathf.Clamp(transform.position.y, fieldMin.y, fieldMax.y)
         );
 
-        if (Vector2.Distance(transform.position, player.position) <= attackRange)
+        if (player != null && Vector2.Distance(transform.position, player.position) <= attackRange)
         {
-            if (!playerInAttackRange)
+            if (player != null && !playerInAttackRange)
             {
                 playerInAttackRange = true;
                 StartCoroutine(StartAttackTimer());
@@ -52,17 +52,31 @@ public class CatBoss : MonoBehaviour
 
     public void LookAtPlayer()
     {
-        spriteRenderer.flipX = transform.position.x < player.position.x;
+        if (player != null)
+        {
+            spriteRenderer.flipX = transform.position.x < player.position.x;
+        }
     }
 
     public bool TooFar()
     {
-        float distance = Vector2.Distance(transform.position, player.position);
-        return distance > followRange;
+        if (player != null)
+        {
+            float distance = Vector2.Distance(transform.position, player.position);
+            return distance > followRange;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public bool ShouldAttack()
     {
+        if (player == null)
+        {
+            return false;
+        }
         return Vector2.Distance(transform.position, player.position) <= attackRange;
     }
 
@@ -76,12 +90,12 @@ public class CatBoss : MonoBehaviour
         attackTimer = 0f;
         while (attackTimer < 3f)
         {
-            if (!playerInAttackRange) yield break;
+            if (player != null && !playerInAttackRange) yield break;
             attackTimer += Time.deltaTime;
             yield return null;
         }
 
-        if (playerInAttackRange)
+        if (player != null && playerInAttackRange)
         {
             gameOver.GameOver();
         }
