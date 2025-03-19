@@ -14,6 +14,8 @@ public class SeedSpawner : MonoBehaviour
     public BossHealth bossHealth;
     gameOverScript gameOver;
 
+    private bool bossBattleMusicPlayed = false;
+
     void Start()
     {
         cm = CollectiblesManager.instance;
@@ -66,6 +68,12 @@ public class SeedSpawner : MonoBehaviour
         {
             isPlayerInField = true;
         }
+
+        if (!bossBattleMusicPlayed)
+        {
+            bossBattleMusicPlayed = true;
+            AudioManager.instance.PlayMusic(AudioManager.instance.bossBattleMusic);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -84,6 +92,9 @@ public class SeedSpawner : MonoBehaviour
             {
                 FindObjectOfType<CatBoss>().ReturnToStart();
             }
+
+            AudioManager.instance.PlayMusic(AudioManager.instance.gameplayMusic);
+            bossBattleMusicPlayed = false;
         }
     }
 }
