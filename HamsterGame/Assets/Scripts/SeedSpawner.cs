@@ -6,13 +6,14 @@ public class SeedSpawner : MonoBehaviour
     [SerializeField] private GameObject seedPrefab; // Het zaadje prefab
     [SerializeField] private float spawnInterval = 2f; // Interval tussen spawns
     [SerializeField] private float spawnHeight = 2f; // Maximale hoogte waarop zaadjes kunnen verschijnen
-    [SerializeField] private float spawnWidth = 5f; // Maximale breedte waarop zaadjes kunnen verschijnen
+    [SerializeField] private float spawnWidth = 3f; // Maximale breedte waarop zaadjes kunnen verschijnen
 
     private bool isPlayerInField = false;
     private bool isSpawning = false;
     public CollectiblesManager cm;
     public BossHealth bossHealth;
     gameOverScript gameOver;
+    public AudioManager audioManager;
 
     private bool bossBattleMusicPlayed = false;
 
@@ -20,6 +21,7 @@ public class SeedSpawner : MonoBehaviour
     {
         cm = CollectiblesManager.instance;
         gameOver = FindObjectOfType<gameOverScript>();
+        audioManager = AudioManager.instance;
     }
 
     void Update()
@@ -72,7 +74,15 @@ public class SeedSpawner : MonoBehaviour
         if (!bossBattleMusicPlayed)
         {
             bossBattleMusicPlayed = true;
-            AudioManager.instance.PlayMusic(AudioManager.instance.bossBattleMusic);
+            if(audioManager != null)
+            {
+                audioManager.PlayMusic(audioManager.bossBattleMusic);
+            }
+            else
+            {
+                Debug.Log("no audiomanager found");
+            }
+           
         }
     }
 

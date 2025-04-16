@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
-    public int maxHealth = 20;
+    public int maxHealth = 30;
     private int currentHealth;
     public Slider healthBar;
 
