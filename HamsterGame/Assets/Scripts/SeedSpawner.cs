@@ -5,7 +5,7 @@ public class SeedSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject seedPrefab; // Het zaadje prefab
     [SerializeField] private float spawnInterval = 2f; // Interval tussen spawns
-    [SerializeField] private float spawnHeight = 2f; // Maximale hoogte waarop zaadjes kunnen verschijnen
+    [SerializeField] private float spawnHeight = 3f; // Maximale hoogte waarop zaadjes kunnen verschijnen
     [SerializeField] private float spawnWidth = 3f; // Maximale breedte waarop zaadjes kunnen verschijnen
 
     private bool isPlayerInField = false;
@@ -39,7 +39,7 @@ public class SeedSpawner : MonoBehaviour
         while (isPlayerInField && cm.countAttackSeeds < 30 && bossHealth.CurrentHealth > 0)
         {
             float randomX = transform.position.x + Random.Range(-spawnWidth / 2, spawnWidth / 2);
-            float randomY = transform.position.y + Random.Range(-spawnHeight, 0);
+            float randomY = transform.position.y + Random.Range(-spawnHeight, 1);
 
             Instantiate(seedPrefab, new Vector2(randomX, randomY), Quaternion.identity);
             yield return new WaitForSeconds(spawnInterval);

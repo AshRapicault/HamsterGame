@@ -6,6 +6,7 @@ public class BossHealth : MonoBehaviour
     public int maxHealth = 30;
     private int currentHealth;
     public Slider healthBar;
+    public int damageAmount = 1;
 
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
@@ -31,7 +32,7 @@ public class BossHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("AttackSeed"))
         {
-            TakeDamage(1);
+            TakeDamage(damageAmount);
             Destroy(collision.gameObject);
         }
     }

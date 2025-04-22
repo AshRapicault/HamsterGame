@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float normalSpeed;
     private bool speedBoostActive = false;
-    private float speedBoostDuration = 10f;
+    private float speedBoostDuration = 15f;
     private float speedBoostTimer = 0f;
 
     private SpriteRenderer spriteRenderer;
@@ -117,9 +117,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ActivateSpeedBoost()
+    public void ActivateSpeedBoost()
     {
-        speed += 5;
+        speed += 10;
         speedBoostActive = true;
         speedBoostTimer = speedBoostDuration;
     }
