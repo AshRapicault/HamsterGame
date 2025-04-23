@@ -8,26 +8,15 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject shopMenu;
-    [SerializeField] CollectiblesManager cm;
     [SerializeField] PlayerMovement player;
     [SerializeField] BossHealth boss;
 
-    public Button upgradeDamageButton;
+    private CollectiblesManager cm;
 
-    private void Update()
+    void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Level 1")
-        {
-            upgradeDamageButton.gameObject.SetActive(false);
-            boss = null;
-            Debug.Log("Damage upgrades are not avaible in this scene");
-        }
-        else
-        {
-            upgradeDamageButton.gameObject.SetActive(true);
-        }
+        cm = CollectiblesManager.instance;
     }
-
     public void Pause()
     {
         pauseMenu.SetActive(true);
@@ -55,9 +44,9 @@ public class PauseMenu : MonoBehaviour
 
     public void purchaseSpeedUpgrade()
     {
-        if (cm.countPoints > 20)
+        if (cm.countPoints >= 10)
         {
-            cm.countPoints -= 20;
+            cm.countPoints -= 10;
             player.ActivateSpeedBoost();
         }
         else
@@ -68,15 +57,23 @@ public class PauseMenu : MonoBehaviour
 
     public void purchaseDamageUpgrade()
     {
-        if (cm.countPoints > 30)
+        if (SceneManager.GetActiveScene().name == "Level1")
         {
-            cm.countPoints -= 30;
-            StartCoroutine(DamageUpgradeTimer());
+            Debug.Log("Damage upgrades are not avaible in this scene");
         }
         else
         {
-            Debug.Log("You do not have enough points to do this purchase.");
+            if (cm.countPoints >= 20)
+            {
+                cm.countPoints -= 20;
+                StartCoroutine(DamageUpgradeTimer());
+            }
+            else
+            {
+                Debug.Log("You do not have enough points to do this purchase." + cm.countPoints);
+            }
         }
+
     }
 
     private IEnumerator DamageUpgradeTimer()

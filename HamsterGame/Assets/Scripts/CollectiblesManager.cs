@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using UnityEngine.PlayerLoop;
 
 public class CollectiblesManager : MonoBehaviour
 {
@@ -10,9 +12,12 @@ public class CollectiblesManager : MonoBehaviour
 
     public int countPoints;
     public int countAttackSeeds;
+    public int savedPoints;//to keep this value in a new level instead of farm seeds or start from 0
+    public int savedAttackSeeds;//to keep this value in a new level instead of farm seeds or start from 0
     public Text pointsText;
     public Text AttackSeedText;
     bool isLevel2;
+
 
     private void Awake()
     {
@@ -34,6 +39,12 @@ public class CollectiblesManager : MonoBehaviour
     {
         pointsText = GameObject.Find("TextPoints")?.GetComponent<Text>();
         AttackSeedText = GameObject.Find("TextAttack")?.GetComponent<Text>();
+
+        if (scene.buildIndex != 0)
+        {
+            savedPoints = countPoints;
+            savedAttackSeeds = countAttackSeeds;
+        }
     }
 
     private void OnEnable()
@@ -65,5 +76,11 @@ public class CollectiblesManager : MonoBehaviour
                 AttackSeedText.text = " : " + countAttackSeeds.ToString() + " /3";
             }
         }
+    }
+
+    public void ResetPointsAndSeedsOnDeath()
+    {
+        countPoints = savedPoints;
+        countAttackSeeds = savedAttackSeeds;
     }
 }

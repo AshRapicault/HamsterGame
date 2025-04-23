@@ -6,6 +6,7 @@ using UnityEngine;
 public class SceneManage : MonoBehaviour
 {
     public static SceneManage instance;
+    public CollectiblesManager cm;
 
     private void Awake()
     {
@@ -28,13 +29,14 @@ public class SceneManage : MonoBehaviour
 
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
+            if (CollectiblesManager.instance != null)
+            {
+                CollectiblesManager.instance.savedPoints = CollectiblesManager.instance.countPoints;
+                CollectiblesManager.instance.savedAttackSeeds = CollectiblesManager.instance.countAttackSeeds;
+            }
+
             SceneManager.LoadSceneAsync(nextSceneIndex);
         }
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadSceneAsync(sceneName);
     }
 }
 

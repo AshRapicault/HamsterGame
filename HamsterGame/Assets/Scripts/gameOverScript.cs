@@ -26,5 +26,7 @@ public class gameOverScript : MonoBehaviour
         }
 
         FindObjectOfType<SeedSpawner>().DestroyAllSeeds();
+
+        CollectiblesManager.instance.ResetPointsAndSeedsOnDeath();
     }
 }
