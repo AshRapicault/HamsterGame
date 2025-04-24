@@ -29,11 +29,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        PlayMusic(mainMenuMusic);
-    }
-
     public void PlayMusic(AudioClip clip)
     {
         if (musicSource.clip == clip) return;
@@ -41,5 +36,13 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = clip;
         musicSource.loop = true;
         musicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
     }
 }

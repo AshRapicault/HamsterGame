@@ -12,19 +12,23 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] BossHealth boss;
 
     private CollectiblesManager cm;
-
+    public static PauseMenu instance;
+    public bool isPaused { get; private set; }
     void Start()
     {
+        instance = this;
         cm = CollectiblesManager.instance;
     }
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        isPaused = true;
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        isPaused = false;
     }
 
     public void ReturnToMain()

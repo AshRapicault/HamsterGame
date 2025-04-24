@@ -9,6 +9,7 @@ public class ShootSeeds : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float seedSpeed = 10f;
 
+    //pauze menu holder
     public CollectiblesManager collectiblesManager;
 
     private void Start()
@@ -18,6 +19,9 @@ public class ShootSeeds : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.instance != null && PauseMenu.instance.isPaused)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (collectiblesManager.countAttackSeeds > 0)
@@ -25,7 +29,6 @@ public class ShootSeeds : MonoBehaviour
                 ShootSeed();
                 collectiblesManager.countAttackSeeds--;
             }
-
         }
     }
 

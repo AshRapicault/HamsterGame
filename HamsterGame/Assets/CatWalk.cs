@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatWalk : StateMachineBehaviour
 {
-    public float speed = 2.5f;
+    [SerializeField] private float speed = 10f;
     Rigidbody2D rb;
     CatBoss cat;
 

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
-    public int maxHealth = 30;
+    public int maxHealth = 50;
     private int currentHealth;
     public Slider healthBar;
     public int damageAmount = 1;
@@ -45,7 +45,6 @@ public class BossHealth : MonoBehaviour
         if (CollectiblesManager.instance != null)
         {
             CollectiblesManager.instance.countPoints += 50;
-            Debug.Log("Boss defeated! +50 points awarded.");
         }
     }
 
