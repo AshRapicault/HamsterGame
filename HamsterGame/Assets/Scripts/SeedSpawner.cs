@@ -7,6 +7,7 @@ public class SeedSpawner : MonoBehaviour
     [SerializeField] private float spawnInterval = 2f; // Interval tussen spawns
     [SerializeField] private float spawnHeight = 3f; // Maximale hoogte waarop zaadjes kunnen verschijnen
     [SerializeField] private float spawnWidth = 3f; // Maximale breedte waarop zaadjes kunnen verschijnen
+    [SerializeField] private bool isBossField = false;
 
     private bool isPlayerInField = false;
     private bool isSpawning = false;
@@ -69,20 +70,20 @@ public class SeedSpawner : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInField = true;
-        }
 
-        if (!bossBattleMusicPlayed)
-        {
-            bossBattleMusicPlayed = true;
-            if(audioManager != null)
+            if (isBossField && !bossBattleMusicPlayed)
             {
-                audioManager.PlayMusic(audioManager.bossBattleMusic);
+                bossBattleMusicPlayed = true;
+                if (audioManager != null)
+                {
+                    audioManager.PlayMusic(audioManager.bossBattleMusic);
+                }
+                else
+                {
+                    Debug.Log("no audiomanager found");
+                }
             }
-            else
-            {
-                Debug.Log("no audiomanager found");
-            }
-           
+
         }
     }
 

@@ -41,6 +41,12 @@ public class BossHealth : MonoBehaviour
     {
         FindObjectOfType<SeedSpawner>().StopSpawning();
         Destroy(gameObject);
+
+        if (CollectiblesManager.instance != null)
+        {
+            CollectiblesManager.instance.countPoints += 50;
+            Debug.Log("Boss defeated! +50 points awarded.");
+        }
     }
 
     public void RestoreHealth()

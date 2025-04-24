@@ -10041,6 +10041,7 @@ MonoBehaviour:
   spawnInterval: 0.5
   spawnHeight: -4
   spawnWidth: 95
+  isBossField: 1
   cm: {fileID: 1129432693}
   bossHealth: {fileID: 715164434}
   audioManager: {fileID: 0}
