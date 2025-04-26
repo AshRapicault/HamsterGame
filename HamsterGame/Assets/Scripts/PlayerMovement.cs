@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private CollectiblesManager cm;
     [SerializeField] private gameOverScript gameOver;
 
+    [SerializeField] private float fallMultiplier = 2.5f;
+    [SerializeField] private float lowJumpMultiplier = 2f;
+    [SerializeField] private float jumpForce = 15f;
+
     private float normalSpeed;
     private bool speedBoostActive = false;
     private float speedBoostDuration = 15f;
@@ -67,11 +71,20 @@ public class PlayerMovement : MonoBehaviour
 
         // Set jumping animation parameter
         anim.SetBool("jumping", !grounded); // Player is jumping if not grounded
+
+        if (body.velocity.y < 0)
+        {
+            body.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (body.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            body.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
     }
 
     private void Jump()
     {
-        body.velocity = new Vector2(body.velocity.x, speed);
+        body.velocity = new Vector2(body.velocity.x, jumpForce);
         grounded = false;
         anim.SetBool("grounded", grounded);
         anim.SetTrigger("jump");

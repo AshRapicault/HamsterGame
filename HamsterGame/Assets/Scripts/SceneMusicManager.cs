@@ -17,7 +17,7 @@ public class SceneMusicManager : MonoBehaviour
     {
         Debug.Log("Scene geladen: " + scene.name); // Geeft aan welke scene geladen wordt
 
-        if (scene.name == "MainMenu")
+        if (scene.name == "Main Menu")
         {
             AudioManager.instance.PlayMusic(AudioManager.instance.mainMenuMusic);
         }

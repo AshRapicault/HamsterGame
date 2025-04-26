@@ -101,10 +101,18 @@ public class SeedSpawner : MonoBehaviour
 
             if (!gameOver.gameOverActive)
             {
-                FindObjectOfType<CatBoss>().ReturnToStart();
+                CatBoss catBoss = FindObjectOfType<CatBoss>();
+                if (catBoss != null)
+                {
+                    catBoss.ReturnToStart();
+                }
             }
 
-            AudioManager.instance.PlayMusic(AudioManager.instance.gameplayMusic);
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlayMusic(AudioManager.instance.gameplayMusic);
+            }
+
             bossBattleMusicPlayed = false;
         }
     }
