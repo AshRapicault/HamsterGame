@@ -25,5 +25,13 @@ public class SceneMusicManager : MonoBehaviour
         {
             AudioManager.instance.PlayMusic(AudioManager.instance.gameplayMusic);
         }
+        else if (scene.name == "Good ending")
+        {
+            AudioManager.instance.PlayMusic(AudioManager.instance.goodEndingMusic);
+        }
+        else if (scene.name == "Bad Ending")
+        {
+            AudioManager.instance.PlayMusic(AudioManager.instance.badEndingMusic);
+        }
     }
 }

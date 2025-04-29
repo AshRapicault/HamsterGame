@@ -8,6 +8,8 @@ public class BossHealth : MonoBehaviour
     public Slider healthBar;
     public int damageAmount = 1;
 
+    [SerializeField] GameObject nextLevel;
+
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
     void Start()
@@ -15,6 +17,8 @@ public class BossHealth : MonoBehaviour
         CurrentHealth = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = CurrentHealth;
+
+        nextLevel.active = false;
     }
 
     public void TakeDamage(int damage)
@@ -46,6 +50,8 @@ public class BossHealth : MonoBehaviour
         {
             CollectiblesManager.instance.countPoints += 50;
         }
+
+        nextLevel.active = true;
     }
 
     public void RestoreHealth()

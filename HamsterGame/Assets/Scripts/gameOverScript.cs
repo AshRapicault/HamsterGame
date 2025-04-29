@@ -7,6 +7,8 @@ public class gameOverScript : MonoBehaviour
 {
     public GameObject gameOverScreen;
     public bool gameOverActive = false;
+
+    public int gameOverCount = 0;
     public void RestartGame()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -34,5 +36,6 @@ public class gameOverScript : MonoBehaviour
         }
 
         CollectiblesManager.instance.ResetPointsAndSeedsOnDeath();
+        gameOverCount++;
     }
 }

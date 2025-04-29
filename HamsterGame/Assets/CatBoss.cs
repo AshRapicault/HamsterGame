@@ -4,7 +4,7 @@ using UnityEngine;
 public class CatBoss : MonoBehaviour
 {
     public Transform player;
-    public float attackRange = 7f;
+    public float attackRange = 5f;
     public float followRange = 15f;
 
     private SpriteRenderer spriteRenderer;
@@ -88,7 +88,7 @@ public class CatBoss : MonoBehaviour
     private IEnumerator StartAttackTimer()
     {
         attackTimer = 0f;
-        while (attackTimer < 3f)
+        while (attackTimer < 2f)
         {
             if (player != null && !playerInAttackRange) yield break;
             attackTimer += Time.deltaTime;

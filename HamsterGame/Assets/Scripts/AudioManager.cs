@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameplayMusic;
     public AudioClip bossBattleMusic;
     public AudioClip gameOverMusic;
+    public AudioClip goodEndingMusic;
+    public AudioClip badEndingMusic;
 
     private void Awake()
     {

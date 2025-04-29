@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level2.unity
     guid: 85b2bf81600edca469fa1adac4241161
+  - enabled: 1
+    path: Assets/Scenes/Levels/Good ending.unity
+    guid: ec034dc2f9153fa4fb1efd9c3975eb6e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Bad Ending.unity
+    guid: 02be15662de9b8d48b1c0da621add21d
   m_configObjects: {}

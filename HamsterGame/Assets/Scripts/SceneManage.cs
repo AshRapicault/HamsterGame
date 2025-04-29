@@ -38,5 +38,29 @@ public class SceneManage : MonoBehaviour
             SceneManager.LoadSceneAsync(nextSceneIndex);
         }
     }
+
+    public void GoodEnding()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadSceneAsync(nextSceneIndex);
+        }
+    }
+
+    public void BadEnding()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 2;
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            if (CollectiblesManager.instance != null)
+            {
+                CollectiblesManager.instance.savedPoints = CollectiblesManager.instance.countPoints;
+                CollectiblesManager.instance.savedAttackSeeds = CollectiblesManager.instance.countAttackSeeds;
+            }
+
+            SceneManager.LoadSceneAsync(nextSceneIndex);
+        }
+    }
 }
 
