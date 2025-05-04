@@ -14,7 +14,6 @@ public class SceneManage : MonoBehaviour
         {
             Debug.Log("SceneManager initialized.");
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
