@@ -1,79 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    public float speed;
-    public GameObject enemyEndPoint;
+    public float speed = 2f;
     public GameObject enemyStartPoint;
+    public GameObject enemyEndPoint;
     private Rigidbody2D body;
     private Animator anim;
-    private Transform currentPoint;
+    private Transform currentTarget;
     private bool movingRight = true;
+
+    public float switchDistance = 0.1f;
 
     public gameOverScript gameOver;
     public CollectiblesManager collectiblesManager;
 
     void Start()
     {
-        // Get references for your components
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        currentPoint = enemyStartPoint.transform;
+
+        currentTarget = enemyEndPoint.transform;
         anim.SetBool("isWalking", true);
 
         gameOver = GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverScript>();
         collectiblesManager = CollectiblesManager.instance;
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
-        if (currentPoint == enemyStartPoint.transform)
-        {
-            body.velocity = new Vector2(speed, 0);
-        }
-        else
-        {
-            body.velocity = new Vector2(-speed, 0);
-        }
+        // Beweeg met constante snelheid naar het doel
+        float direction = Mathf.Sign(currentTarget.position.x - transform.position.x);
+        body.velocity = new Vector2(direction * speed, body.velocity.y);
 
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == enemyStartPoint.transform)
+        // Controleer of we dicht genoeg zijn om van richting te wisselen
+        if (Mathf.Abs(transform.position.x - currentTarget.position.x) < switchDistance)
         {
-            flip();
-            currentPoint = enemyEndPoint.transform;
-        }
-
-        if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == enemyEndPoint.transform)
-        {
-            flip();
-            currentPoint = enemyStartPoint.transform;
+            if (currentTarget == enemyEndPoint.transform)
+            {
+                currentTarget = enemyStartPoint.transform;
+            }
+            else
+            {
+                currentTarget = enemyEndPoint.transform;
+            }
+            // Nieuw: kijkrichting bijwerken
+            UpdateDirection(direction);
         }
     }
-    private void flip()
+
+    void UpdateDirection(float direction)
     {
-        if (movingRight && currentPoint == enemyEndPoint.transform || !movingRight && currentPoint == enemyStartPoint.transform)
-        {
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
-            transform.localScale = localScale;
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * (direction > 0 ? 1 : -1);
+        transform.localScale = scale;
+    }
 
-            movingRight = !movingRight;
+    void OnDrawGizmos()
+    {
+        if (enemyStartPoint != null && enemyEndPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(enemyStartPoint.transform.position, 0.2f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(enemyEndPoint.transform.position, 0.2f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(enemyStartPoint.transform.position, enemyEndPoint.transform.position);
         }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(enemyStartPoint.transform.position, 0.5f);
-        Gizmos.DrawWireSphere(enemyEndPoint.transform.position, 0.5f);
-        Gizmos.DrawLine(enemyStartPoint.transform.position, enemyEndPoint.transform.position);
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {

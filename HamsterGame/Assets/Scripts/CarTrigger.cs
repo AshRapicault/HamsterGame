@@ -15,6 +15,7 @@ public class CarTrigger : MonoBehaviour
             triggered = true;
             car.GetComponent<CarController>().StartDriving(); 
             StartCoroutine(ShowBadEnding());
+            AudioManager.instance.PlayMusic(AudioManager.instance.finalMusicBadEnding2);
         }
     }
 

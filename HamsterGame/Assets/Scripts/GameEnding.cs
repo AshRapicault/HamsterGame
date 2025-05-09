@@ -9,5 +9,6 @@ public class GameEnding : MonoBehaviour
     public void ReturnToMain()
     {
         SceneManager.LoadScene("Main Menu");
+        CollectiblesManager.instance.ResetAll();
     }
 }

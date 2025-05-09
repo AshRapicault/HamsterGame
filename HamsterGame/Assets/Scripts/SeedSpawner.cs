@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SeedSpawner : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SeedSpawner : MonoBehaviour
     [SerializeField] private float spawnHeight = 3f; // Maximale hoogte waarop zaadjes kunnen verschijnen
     [SerializeField] private float spawnWidth = 3f; // Maximale breedte waarop zaadjes kunnen verschijnen
     [SerializeField] private bool isBossField = false;
+    [SerializeField] private GameObject bossBattleHintPanel;
 
     private bool isPlayerInField = false;
     private bool isSpawning = false;
@@ -69,6 +71,11 @@ public class SeedSpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (bossBattleHintPanel != null)
+            {
+                bossBattleHintPanel.SetActive(true);
+            }
+
             isPlayerInField = true;
 
             if (isBossField && !bossBattleMusicPlayed)
@@ -114,6 +121,14 @@ public class SeedSpawner : MonoBehaviour
             }
 
             bossBattleMusicPlayed = false;
+        }
+    }
+
+    public void CloseHintPanel()
+    {
+        if (bossBattleHintPanel != null)
+        {
+            bossBattleHintPanel.SetActive(false);
         }
     }
 }

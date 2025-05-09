@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +7,6 @@ public class ShootSeeds : MonoBehaviour
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float seedSpeed = 10f;
 
-    //pauze menu holder
     public CollectiblesManager collectiblesManager;
 
     private void Start()
@@ -34,13 +31,22 @@ public class ShootSeeds : MonoBehaviour
 
     private void ShootSeed()
     {
-        GameObject newSeed = Instantiate(seedPrefab, shootPoint.position, Quaternion.identity);
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float direction = mouseWorldPosition.x < transform.position.x ? -1f : 1f;
 
+        Vector3 spawnPos = shootPoint.position + new Vector3(direction * 0.5f, 0, 0);
+
+        GameObject newSeed = Instantiate(seedPrefab, spawnPos, Quaternion.identity);
         Rigidbody2D rb = newSeed.GetComponent<Rigidbody2D>();
 
-        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        rb.velocity = new Vector2(direction * seedSpeed, 0f);
 
-        rb.velocity = direction * seedSpeed;
+        Collider2D playerCollider = GetComponent<Collider2D>();
+        Collider2D seedCollider = newSeed.GetComponent<Collider2D>();
+        if (playerCollider != null && seedCollider != null)
+        {
+            Physics2D.IgnoreCollision(playerCollider, seedCollider);
+        }
 
         StartCoroutine(DestroySeedAfterTime(newSeed, 3f));
     }
@@ -48,6 +54,7 @@ public class ShootSeeds : MonoBehaviour
     private IEnumerator DestroySeedAfterTime(GameObject seed, float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(seed);
+        if (seed != null)
+            Destroy(seed);
     }
 }

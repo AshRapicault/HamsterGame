@@ -8,6 +8,7 @@ public class SceneManage : MonoBehaviour
     public static SceneManage instance;
     public CollectiblesManager cm;
 
+
     private void Awake()
     {
         if (instance == null)

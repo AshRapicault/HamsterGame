@@ -49,6 +49,7 @@ public class BossHealth : MonoBehaviour
         if (CollectiblesManager.instance != null)
         {
             CollectiblesManager.instance.countPoints += 50;
+            CollectiblesManager.instance.countAttackSeeds = 0;
         }
 
         nextLevel.active = true;

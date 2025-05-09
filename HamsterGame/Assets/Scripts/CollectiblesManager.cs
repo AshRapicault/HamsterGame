@@ -83,4 +83,12 @@ public class CollectiblesManager : MonoBehaviour
         countPoints = savedPoints;
         countAttackSeeds = savedAttackSeeds;
     }
+
+    public void ResetAll()
+    {
+        countPoints = 0;
+        countAttackSeeds = 0;
+        savedPoints = 0;
+        savedAttackSeeds = 0;
+    }
 }
