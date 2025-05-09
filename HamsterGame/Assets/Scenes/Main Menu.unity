@@ -1908,11 +1908,11 @@ PrefabInstance:
     - target: {fileID: 3609283385712101912, guid: 602218119f4d42b44841c861deb6e00e, type: 3}
       propertyPath: badEndingMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 9e24f02426cf92e40905aedc7ae459c4, type: 3}
+      objectReference: {fileID: 8300000, guid: e53b202651414f44ba5143a2a33c2076, type: 3}
     - target: {fileID: 3609283385712101912, guid: 602218119f4d42b44841c861deb6e00e, type: 3}
       propertyPath: finalMusicBadEnding
       value: 
-      objectReference: {fileID: 8300000, guid: e53b202651414f44ba5143a2a33c2076, type: 3}
+      objectReference: {fileID: 8300000, guid: 9e24f02426cf92e40905aedc7ae459c4, type: 3}
     - target: {fileID: 3609283385712101912, guid: 602218119f4d42b44841c861deb6e00e, type: 3}
       propertyPath: finalMusicBadEnding2
       value: 
