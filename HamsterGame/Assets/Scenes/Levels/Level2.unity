@@ -3151,7 +3151,7 @@ Transform:
   m_GameObject: {fileID: 715164427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.4, y: -13.6467, z: -5.9391875}
+  m_LocalPosition: {x: 196.3, y: -13.6, z: -5.9391875}
   m_LocalScale: {x: 7.6133766, y: 6.322434, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3174,7 +3174,7 @@ MonoBehaviour:
   attackRange: 5
   followRange: 17
   fieldMin: {x: 105, y: -15}
-  fieldMax: {x: 180, y: -15}
+  fieldMax: {x: 200, y: -15}
   gameOver: {fileID: 120159507}
 --- !u!114 &715164434
 MonoBehaviour:
@@ -3768,7 +3768,7 @@ Transform:
   m_GameObject: {fileID: 867507803}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.84, y: -0.92, z: 0}
+  m_LocalPosition: {x: 6.8, y: -0.92, z: 0}
   m_LocalScale: {x: 1.9621924, y: 1.6895101, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10667,7 +10667,7 @@ Transform:
   m_GameObject: {fileID: 1545009497}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: -3.1, z: 0}
+  m_LocalPosition: {x: 98.3, y: -15.8, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:

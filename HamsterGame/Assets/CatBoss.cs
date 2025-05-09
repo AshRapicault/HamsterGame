@@ -23,7 +23,7 @@ public class CatBoss : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        startPosition = new Vector2(165f, -15f);
+        startPosition = new Vector2(170f, -15f);
         transform.position = startPosition;
         gameOver = FindObjectOfType<gameOverScript>();
     }
@@ -34,6 +34,12 @@ public class CatBoss : MonoBehaviour
             Mathf.Clamp(transform.position.x, fieldMin.x, fieldMax.x),
             Mathf.Clamp(transform.position.y, fieldMin.y, fieldMax.y)
         );
+
+        // Debug lines to visualize the field boundaries
+        Debug.DrawLine(new Vector2(fieldMin.x, fieldMin.y), new Vector2(fieldMin.x, fieldMax.y), Color.red);
+        Debug.DrawLine(new Vector2(fieldMax.x, fieldMin.y), new Vector2(fieldMax.x, fieldMax.y), Color.red);
+        Debug.DrawLine(new Vector2(fieldMin.x, fieldMin.y), new Vector2(fieldMax.x, fieldMin.y), Color.red);
+        Debug.DrawLine(new Vector2(fieldMin.x, fieldMax.y), new Vector2(fieldMax.x, fieldMax.y), Color.red);
 
         if (player != null && Vector2.Distance(transform.position, player.position) <= attackRange)
         {
